@@ -1,16 +1,17 @@
-package com.example.yassine.recyclerviewtests;
+package com.example.yassine.recyclerviewtests.json;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JSONInfos {
     @SerializedName("nhits")
-    int nhits;
+    public int nhits;
     @SerializedName("records")
-    List<VelibStation> records;
+    public ArrayList<VelibStation> records;
 
-    JSONInfos(int nhits, List<VelibStation> records)
+    JSONInfos(int nhits, ArrayList<VelibStation> records)
     {
         this.nhits = nhits;
         this.records = records;

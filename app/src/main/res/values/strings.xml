@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">RecyclerViewTests</string>
+    <string name="app_name">VeLibre</string>
+
+    <string name="title_activity_main">Liste des stations</string>
+    <string name="title_activity_about">A propos</string>
+    <string name="group">Groupe</string>
+    <string name="TEST">TEST</string>
+    <string name="about">Fait par:\n\nYassine Ammar &amp;\nMaximilien Gomes</string>
 </resources>

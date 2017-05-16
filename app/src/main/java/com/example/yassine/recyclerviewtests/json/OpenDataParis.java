@@ -1,12 +1,12 @@
-package com.example.yassine.recyclerviewtests;
+package com.example.yassine.recyclerviewtests.json;
 
-import java.util.List;
+import com.example.yassine.recyclerviewtests.json.JSONInfos;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-interface OpenDataParis {
+public interface OpenDataParis {
 
         String ENDPOINT = "https://opendata.paris.fr";
         @GET("/api/records/1.0/search/")
