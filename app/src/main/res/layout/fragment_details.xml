@@ -6,7 +6,31 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textViewFragment"
+    android:id="@+id/textViewFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="TextView"
+    android:textSize="20sp" />
+    <TextView
+        android:id="@+id/textViewFragmentStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/textViewFragmentBikeStands"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/textViewFragmentBikeStandsAvailable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/textViewFragmentAdress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"

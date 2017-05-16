@@ -22,7 +22,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return DetailFragment.newInstance(mDataset.get(position).field.name);
+        //return DetailFragment.newInstance(mDataset.get(position).field.name);
+        return DetailFragment.newInstance(mDataset.get(position));
     }
     @Override
     public int getCount() {
