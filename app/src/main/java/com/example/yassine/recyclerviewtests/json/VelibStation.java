@@ -52,4 +52,13 @@ public class VelibStation implements Parcelable {
             return new VelibStation[size];
         }
     };
+
+    public String getTextShare()
+    {
+        String r = this.field.name + "\nStatus: " + field.status
+                    + "\nBike Stands: " + field.availableBikes
+                    + "\nAvailable Bike Stands: " + field.availableBikeStands
+                    + "\nAdress: " + field.address;
+        return r;
+    }
 }

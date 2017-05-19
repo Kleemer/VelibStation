@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.yassine.recyclerviewtests.R;
 import com.example.yassine.recyclerviewtests.adapter.ViewPagerAdapter;
@@ -24,6 +27,10 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Detail");
+
         final Intent intent = getIntent();
         if (intent != null) {
             if (intent.hasExtra("stations"))
@@ -37,5 +44,30 @@ public class DetailsActivity extends AppCompatActivity {
         mViewPager.setAdapter(mPagerAdapter);
         Log.d("pos", "" + firstPos);
         mViewPager.setCurrentItem(firstPos);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_detail, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_group:
+                Intent intent = new Intent(DetailsActivity.this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_share:
+                String textToShare = mDataset.get(firstPos).getTextShare();
+                Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                sendIntent.setType("text/plain");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, textToShare);
+                startActivity(Intent.createChooser(sendIntent, "share"));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
