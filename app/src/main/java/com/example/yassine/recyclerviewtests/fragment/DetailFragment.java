@@ -33,6 +33,7 @@ public class DetailFragment extends Fragment {
         args.putInt("bike_stands", velibstation.field.availableBikeStands);
         args.putInt("available_bike_stands", velibstation.field.availableBikes);
         args.putString("adress", velibstation.field.address);
+        args.putString("last_update", velibstation.field.lastUpdate);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,6 +51,8 @@ public class DetailFragment extends Fragment {
         textViewBikeStandsAvailable.setText("Available Bike Stands: " + getArguments().getInt("available_bike_stands"));
         TextView textViewFragmentAdress = (TextView) rootView.findViewById(R.id.textViewFragmentAdress);
         textViewFragmentAdress.setText("Adress: " + getArguments().getString("adress"));
+        TextView textViewFragmentUpdate = (TextView) rootView.findViewById(R.id.textViewFragmentUpdate);
+        textViewFragmentUpdate.setText("Last Update: " + getArguments().getString("last_update"));
 
         textViewFragmentAdress.setOnClickListener(new View.OnClickListener() {
             @Override

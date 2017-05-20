@@ -17,14 +17,17 @@ public class Field implements Parcelable {
     public final int availableBikes;
     @SerializedName("available_bike_stands")
     public final int availableBikeStands;
+    @SerializedName("last_update")
+    public final String lastUpdate;
 
-    public Field(String name, String address, String status, int availableBikes, int availableBikeStands)
+    public Field(String name, String address, String status, int availableBikes, int availableBikeStands, String lastUpdate)
     {
         this.name = name;
         this.address = address;
         this.status = status;
         this.availableBikes = availableBikes;
         this.availableBikeStands = availableBikeStands;
+        this.lastUpdate = lastUpdate;
     }
 
     protected Field(Parcel in) {
@@ -33,6 +36,7 @@ public class Field implements Parcelable {
         status = in.readString();
         availableBikes = in.readInt();
         availableBikeStands = in.readInt();
+        lastUpdate = in.readString();
     }
 
     @Override
@@ -42,6 +46,7 @@ public class Field implements Parcelable {
         dest.writeString(status);
         dest.writeInt(availableBikes);
         dest.writeInt(availableBikeStands);
+        dest.writeString(lastUpdate);
     }
 
     @Override
