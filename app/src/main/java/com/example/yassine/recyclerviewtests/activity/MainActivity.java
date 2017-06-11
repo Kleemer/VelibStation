@@ -1,5 +1,9 @@
 package com.example.yassine.recyclerviewtests.activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.yassine.recyclerviewtests.adapter.RecyclerAdapter;
 import com.example.yassine.recyclerviewtests.R;
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private RecyclerView mRecyclerView;
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +47,23 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.title_activity_main);
 
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                                                     @Override
+                                                     public void onRefresh() {
+                                                         fillValues();
+                                                         mSwipeRefreshLayout.setRefreshing(false);
+                                                     }
+                                                 });
+
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        if (!isNetworkAvailable())
+            Toast.makeText(getApplicationContext(), "internet is not available", Toast.LENGTH_SHORT).show();
 
         mAdapter = new RecyclerAdapter();
         mRecyclerView.setAdapter(mAdapter);
@@ -77,6 +95,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private void fillValues()
     {
+        mAdapter.clear();
+        if (!isNetworkAvailable())
+            Toast.makeText(getApplicationContext(), "internet is not available", Toast.LENGTH_SHORT).show();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(OpenDataParis.ENDPOINT)
                                         .addConverterFactory(GsonConverterFactory.create())
                                         .build();
@@ -127,5 +148,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             mAdapter.setmDatasetCurrent(filtered);
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
